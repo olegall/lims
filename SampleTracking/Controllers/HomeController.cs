@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using SampleTracking.Models;
 
 namespace SampleTracking.Controllers
@@ -22,9 +21,9 @@ namespace SampleTracking.Controllers
         }
  
         [HttpPost]
-        public ActionResult Create(User user)
+        public ActionResult Create(Sample sample)
         {
-            repo.Create(user);
+            repo.Create(sample);
             return RedirectToAction("Index");
         }
     }

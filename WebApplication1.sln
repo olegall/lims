@@ -5,7 +5,12 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1.csproj", "{E11D38CA-61A7-475D-92F2-64B4002905F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleTracking", "SampleTracking\SampleTracking.csproj", "{F3CEA201-F1CF-485B-B1EC-83503681695A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTracking", "SampleTracking\SampleTracking.csproj", "{F3CEA201-F1CF-485B-B1EC-83503681695A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{69BFE4FE-B511-4DF2-91CD-AF87ACC69777}"
+	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

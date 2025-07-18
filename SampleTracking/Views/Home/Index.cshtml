@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SampleTracking.Models.User>
+﻿@model IEnumerable<SampleTracking.Models.Sample>
 @{
     ViewData["Title"] = "Список пользователей";
 }
@@ -8,8 +8,8 @@
 </p>
 <table class="table">
     <tr>
-        <th>Имя</th>
-        <th>Возраст</th>
+        <th>Наименование</th>
+        <th>Шифр</th>
         <th></th>
     </tr>
 
@@ -17,13 +17,7 @@
     {
         <tr>
             <td>@item.Name</td>
-            <td>
-                @item.Age
-            </td>
-            <td>
-                <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
-                <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-            </td>
+            <td>@item.No_</td>
         </tr>
     }
 </table>

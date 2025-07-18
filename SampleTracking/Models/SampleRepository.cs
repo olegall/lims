@@ -8,8 +8,8 @@ namespace SampleTracking.Models
 {
     public interface ISampleRepository
     {
-        void Create(User user);
-        List<User> GetSamples();
+        void Create(Sample sample);
+        List<Sample> GetSamples();
     }
     public class SampleRepository : ISampleRepository
     {
@@ -18,20 +18,20 @@ namespace SampleTracking.Models
         {
             connectionString = conn;
         }
-        public List<User> GetSamples()
+        public List<Sample> GetSamples()
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<User>("SELECT * FROM Users").ToList();
+                return db.Query<Sample>("SELECT * FROM Samples").ToList();
             }
         }
 
-        public void Create(User user)
+        public void Create(Sample sample)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age)";
-                db.Execute(sqlQuery, user);
+                var sqlQuery = "INSERT INTO Samples (Name, No_) VALUES(@Name, @No_)";
+                db.Execute(sqlQuery, sample);
 
                 // если мы хотим получить id добавленного пользователя
                 //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
