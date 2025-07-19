@@ -6,10 +6,13 @@ namespace SampleTracking.Controllers
     public class HomeController : Controller
     {
         ISampleRepository repo;
+
         public HomeController(ISampleRepository r)
         {
+            new Producer().Send("SampleCreated");
             repo = r;
         }
+
         public ActionResult Index()
         {
             return View(repo.GetSamples());
