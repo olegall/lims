@@ -1,6 +1,7 @@
 using SampleTracking.Models;
 using MessageBroker;
 using MessageBroker.Interfaces;
+using SampleTracking.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,6 @@
 using MessageBroker.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SampleTracking.Interfaces;
 using SampleTracking.Models;
 
 namespace SampleTracking.Controllers;
@@ -15,17 +16,28 @@ public class SampleController : Controller
         _producer = producer;
     }
 
+    [HttpGet]
+    [Route("/samples")]
     public ActionResult Index()
     {
         return View(_sampleRepository.GetSamples());
     }
 
-    public ActionResult Create()
+    [HttpGet]
+    [Route("/samples/{id}")]
+    public ActionResult Index(int id)
+    {
+        var sample = _sampleRepository.GetSampleById(id);
+        return Ok();
+    }
+
+    public ActionResult ShowCreate()
     {
         return View();
     }
 
     [HttpPost]
+    [Route("/samples")]
     public ActionResult Create(Sample sample)
     {
         _sampleRepository.Create(sample);

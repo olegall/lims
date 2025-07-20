@@ -1,43 +1,50 @@
 ﻿using Dapper;
-using System.Collections.Generic;
 using System.Data;
 using Microsoft.Data.SqlClient;
-using System.Linq;
+using SampleTracking.Interfaces;
 
-namespace SampleTracking.Models
+namespace SampleTracking.Models;
+
+public class SampleRepository : ISampleRepository
 {
-    public interface ISampleRepository
+    string connectionString = null;
+
+    public SampleRepository(string conn)
     {
-        void Create(Sample sample);
-        List<Sample> GetSamples();
+        connectionString = conn;
     }
-    public class SampleRepository : ISampleRepository
+
+    public List<Sample> GetSamples()
     {
-        string connectionString = null;
-        public SampleRepository(string conn)
+        using (IDbConnection db = new SqlConnection(connectionString))
         {
-            connectionString = conn;
+            return db.Query<Sample>("SELECT * FROM Samples").ToList();
         }
-        public List<Sample> GetSamples()
+    }
+    
+    public Sample GetSampleById(int id)
+    {
+        using (IDbConnection db = new SqlConnection(connectionString))
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                return db.Query<Sample>("SELECT * FROM Samples").ToList();
-            }
+            var sample = db.Query<Sample>($"SELECT * FROM Samples WHERE Id = {id}").FirstOrDefault();
+            
+            if (sample is null) throw new Exception();
+            
+            return sample;
         }
+    }
 
-        public void Create(Sample sample)
+    public void Create(Sample sample)
+    {
+        using (IDbConnection db = new SqlConnection(connectionString))
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                var sqlQuery = "INSERT INTO Samples (Name, No_) VALUES(@Name, @No_)";
-                db.Execute(sqlQuery, sample);
+            var sqlQuery = "INSERT INTO Samples (Name, No_) VALUES(@Name, @No_)";
+            db.Execute(sqlQuery, sample);
 
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
-            }
+            // если мы хотим получить id добавленного пользователя
+            //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
+            //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
+            //user.Id = userId.Value;
         }
     }
 }
