@@ -3,6 +3,14 @@
 public class Sample
 {
     public int Id { get; set; }
+
+    /// <summary>
+    /// Наименование
+    /// </summary>
     public string Name { get; set; }
-    public string No_ { get; set; }
+
+    /// <summary>
+    /// Шифр
+    /// </summary>
+    public string Code { get; set; }
 }

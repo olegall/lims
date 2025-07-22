@@ -6,7 +6,7 @@ public interface ISampleRepository
 {
     void Create(Sample sample);
 
-    List<Sample> GetSamples();
+    IEnumerable<Sample> GetSamples();
 
     Sample GetSampleById(int id);
 }

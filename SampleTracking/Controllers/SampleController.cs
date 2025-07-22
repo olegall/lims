@@ -28,6 +28,7 @@ public class SampleController : Controller
     public ActionResult Index(int id)
     {
         var sample = _sampleRepository.GetSampleById(id);
+
         return Ok();
     }
 
@@ -41,7 +42,9 @@ public class SampleController : Controller
     public ActionResult Create(Sample sample)
     {
         _sampleRepository.Create(sample);
+
         _producer.SendToSamples("SampleCreated");
+
         return RedirectToAction("Index");
     }
 }

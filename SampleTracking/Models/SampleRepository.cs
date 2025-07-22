@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System.Data;
 using Microsoft.Data.SqlClient;
 using SampleTracking.Interfaces;
 
@@ -7,24 +6,24 @@ namespace SampleTracking.Models;
 
 public class SampleRepository : ISampleRepository
 {
-    string connectionString = null;
+    private readonly string _connectionString;
 
     public SampleRepository(string conn)
     {
-        connectionString = conn;
+        _connectionString = conn;
     }
 
-    public List<Sample> GetSamples()
+    public IEnumerable<Sample> GetSamples()
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (var db = new SqlConnection(_connectionString))
         {
-            return db.Query<Sample>("SELECT * FROM Samples").ToList();
+            return db.Query<Sample>("SELECT * FROM Samples");
         }
     }
     
     public Sample GetSampleById(int id)
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (var db = new SqlConnection(_connectionString))
         {
             var sample = db.Query<Sample>($"SELECT * FROM Samples WHERE Id = {id}").FirstOrDefault();
             
@@ -36,15 +35,11 @@ public class SampleRepository : ISampleRepository
 
     public void Create(Sample sample)
     {
-        using (IDbConnection db = new SqlConnection(connectionString))
+        using (var db = new SqlConnection(_connectionString))
         {
-            var sqlQuery = "INSERT INTO Samples (Name, No_) VALUES(@Name, @No_)";
-            db.Execute(sqlQuery, sample);
+            var sqlQuery = "INSERT INTO Samples (Name, Code) VALUES(@Name, @Code)";
 
-            // если мы хотим получить id добавленного пользователя
-            //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-            //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-            //user.Id = userId.Value;
+            db.Execute(sqlQuery, sample);
         }
     }
 }
