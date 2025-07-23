@@ -1,4 +1,4 @@
-﻿namespace SampleTracking.Models;
+﻿namespace SampleTracking.Domain;
 
 public class Sample
 {
@@ -7,10 +7,10 @@ public class Sample
     /// <summary>
     /// Наименование
     /// </summary>
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// Шифр
     /// </summary>
-    public string Code { get; set; }
+    public required string Code { get; set; }
 }

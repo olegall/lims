@@ -1,4 +1,4 @@
-﻿using SampleTracking.Models;
+﻿using SampleTracking.Domain;
 
 namespace SampleTracking.Interfaces;
 

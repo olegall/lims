@@ -9,18 +9,21 @@ public class SampleController : Controller
 {
     private readonly ISampleRepository _sampleRepository;
     private readonly IProducer _producer;
+    private readonly IMapper _mapper;
 
-    public SampleController(ISampleRepository sampleRepository, IProducer producer)
+    public SampleController(ISampleRepository sampleRepository, IProducer producer, IMapper mapper)
     {
         _sampleRepository = sampleRepository;
         _producer = producer;
+        _mapper = mapper;
     }
 
     [HttpGet]
     [Route("/samples")]
     public ActionResult Index()
     {
-        return View(_sampleRepository.GetSamples());
+        var samplesVm = _mapper.Map(_sampleRepository.GetSamples());
+        return View(samplesVm);
     }
 
     [HttpGet]
@@ -28,6 +31,7 @@ public class SampleController : Controller
     public ActionResult Index(int id)
     {
         var sample = _sampleRepository.GetSampleById(id);
+        var sampleVM = _mapper.Map(sample);
 
         return Ok();
     }
@@ -39,8 +43,9 @@ public class SampleController : Controller
 
     [HttpPost]
     [Route("/samples")]
-    public ActionResult Create(Sample sample)
+    public ActionResult Create(SampleVM sampleVM)
     {
+        var sample = _mapper.Map(sampleVM);
         _sampleRepository.Create(sample);
 
         _producer.SendToSamples("SampleCreated");
