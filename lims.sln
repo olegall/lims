@@ -5,13 +5,6 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTracking", "SampleTracking\SampleTracking.csproj", "{F3CEA201-F1CF-485B-B1EC-83503681695A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{69BFE4FE-B511-4DF2-91CD-AF87ACC69777}"
-	ProjectSection(SolutionItems) = preProject
-		domain.drawio = domain.drawio
-		lims.drawio = lims.drawio
-		README.MD = README.MD
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{1D62F102-865B-4FAD-946B-6258ED42A260}"
 EndProject
 Global
