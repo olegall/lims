@@ -7,10 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTracking", "SampleTra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{69BFE4FE-B511-4DF2-91CD-AF87ACC69777}"
 	ProjectSection(SolutionItems) = preProject
+		domain.drawio = domain.drawio
+		lims.drawio = lims.drawio
 		README.MD = README.MD
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{1D62F102-865B-4FAD-946B-6258ED42A260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBroker", "MessageBroker\MessageBroker.csproj", "{1D62F102-865B-4FAD-946B-6258ED42A260}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
